@@ -28,6 +28,11 @@
 
   <div class="field">
     <%= form.label :startdate %>
+    <%= form.text_field :startdate, :class => 'datepicker' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :startdate %>
     <%= form.date_select :startdate, id: :log_date %>
   </div>
 

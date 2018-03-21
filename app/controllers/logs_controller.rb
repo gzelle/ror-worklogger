@@ -7,7 +7,12 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.json
   def index
-    @logs = Log.all
+    if params[:startdate]
+      @logs = Log.where(:startdate => params[:startdate])
+      
+    else
+      @logs = Log.all
+    end
   end
 
   # GET /logs/1
@@ -77,12 +82,16 @@ class LogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
-      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id)
+      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id, :sdate, :edate)
+    end
+
+    def filter_params
+      params.permit(:sdate, :edate)
     end
 
     def correct_user
       @log = current_user.logs.find_by(id: params[:id])
-      redirect_to root_url if @log.nil?
+      redirect_to login_path if @log.nil?
     end
 
     def prepare_projects

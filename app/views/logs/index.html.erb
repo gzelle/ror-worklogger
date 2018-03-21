@@ -2,6 +2,18 @@
 
 <h1>Logs</h1>
 
+<%= link_to 'Create New Log', new_log_path %>
+<div>
+<%= form_tag(logs_path, method: :get) do %>
+Select date: 
+  <%= date_select :sdate, {}%>
+  -
+
+  <%= submit_tag 'Filter' %>
+  <%= link_to 'Reset', '#' %>
+<% end %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -17,7 +29,7 @@
   <tbody>
     <% @logs.each do |log| %>
       <tr>
-        <td><%= log.duration %></td>
+        <td><%= log.duration %>h</td>
         <td><%= log.project.name %></td>
         <td><%= log.remarks %></td>
         <td><%= log.startdate %></td>
@@ -31,4 +43,3 @@
 
 <br>
 
-<%= link_to 'New Log', new_log_path %>

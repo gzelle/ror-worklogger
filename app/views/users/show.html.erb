@@ -15,14 +15,5 @@
   <%= @user.email %>
 </p>
 
-<div class="col-md-8">
-    <% if @user.logs.any? %>
-      <h3>Logs (<%= @user.logs.count %>)</h3>
-      <ol class="logs">
-        <%= render @logs %>
-      </ol>
-    <% end %>
-  </div>
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', logs_path %>

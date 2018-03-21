@@ -1,4 +1,5 @@
 class Log < ApplicationRecord
+	attr_accessor :sdate, :edate
   belongs_to :user
   belongs_to :project
   default_scope -> { order(created_at: :desc) }

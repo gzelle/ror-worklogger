@@ -13,3 +13,9 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require bootstrap-datepicker
+$(document).on('turbolinks:load', function () {
+    // jquery javascript
+    // your code snippet here
+ $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+}); 
