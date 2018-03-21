@@ -1,5 +1,7 @@
 class LogsController < ApplicationController
   before_action :set_log, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :correct_user, only: :destroy
   before_action :prepare_projects
 
   # GET /logs
@@ -11,6 +13,7 @@ class LogsController < ApplicationController
   # GET /logs/1
   # GET /logs/1.json
   def show
+    @log = Log.find(params[:id])
   end
 
   # GET /logs/new
@@ -25,7 +28,7 @@ class LogsController < ApplicationController
   # POST /logs
   # POST /logs.json
   def create
-    @log = Log.new(log_params)
+    @log = current_user.logs.build(log_params)
 
     respond_to do |format|
       if @log.save
@@ -68,9 +71,18 @@ class LogsController < ApplicationController
       @log = Log.find(params[:id])
     end
 
+    def set_category
+      @category = Project.find(params[:project_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
-      params.require(:log).permit(:duration, :remarks, :date, :user_id)
+      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id)
+    end
+
+    def correct_user
+      @log = current_user.logs.find_by(id: params[:id])
+      redirect_to root_url if @log.nil?
     end
 
     def prepare_projects

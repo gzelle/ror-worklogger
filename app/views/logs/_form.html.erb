@@ -17,8 +17,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :project %>
-    <%= form.collection_select(:project_id, @projects, :id, :name, :include_blank => "Please select Project") %>
+    <%= form.label :project %><br />
+    <%= form.collection_select(:project_id, @projects, :id, :name, :include_blank => "Please select Projects") %>
   </div>
 
   <div class="field">
@@ -27,13 +27,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :date %>
-    <%= form.date_select :date, id: :log_date %>
+    <%= form.label :startdate %>
+    <%= form.date_select :startdate, id: :log_date %>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :log_user_id %>
+    <%= form.label :enddate %>
+    <%= form.date_select :enddate, id: :log_date %>
   </div>
 
   <div class="actions">

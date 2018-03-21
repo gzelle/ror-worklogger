@@ -6,18 +6,23 @@
 </p>
 
 <p>
+  <strong>Project:</strong>
+  <%= @log.project.name %>
+</p>
+
+<p>
   <strong>Remarks:</strong>
   <%= @log.remarks %>
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @log.date %>
+  <strong>Start Date:</strong>
+  <%= @log.startdate %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @log.user_id %>
+  <strong>End Date:</strong>
+  <%= @log.enddate %>
 </p>
 
 <%= link_to 'Edit', edit_log_path(@log) %> |

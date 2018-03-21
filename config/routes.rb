@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'sessions#new'
   get 'sessions/new'
   get 'users/new'	
   
   get     '/users',   to: 'users#index'
+  get     '/logs',    to: 'logs#index'
   get 		'/signup', 	to: 'users#new'
   get 		'/login', 	to: 'sessions#new'
   post 		'/login', 	to: 'sessions#create'

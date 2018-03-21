@@ -6,9 +6,10 @@
   <thead>
     <tr>
       <th>Duration</th>
+      <th>Project</th>
       <th>Remarks</th>
       <th>Date</th>
-      <th>User</th>
+      <th>Actions</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,9 +18,9 @@
     <% @logs.each do |log| %>
       <tr>
         <td><%= log.duration %></td>
+        <td><%= log.project.name %></td>
         <td><%= log.remarks %></td>
-        <td><%= log.date %></td>
-        <td><%= log.user_id %></td>
+        <td><%= log.startdate %></td>
         <td><%= link_to 'Show', log %></td>
         <td><%= link_to 'Edit', edit_log_path(log) %></td>
         <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
