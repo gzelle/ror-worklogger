@@ -6,5 +6,3 @@
 #     https: false
 #   )
 # end
-
-config.browser_validations =true
