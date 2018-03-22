@@ -15,6 +15,9 @@
 = require jquery
 //= require bootstrap-datepicker
 //= require_tree .
+//= require jquery3
+//= require popper
+//= require bootstrap
 $(document).ready(function() {
 
 $("#start_date").datepicker({dateFormat: "yy-mm-dd"});

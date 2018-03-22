@@ -7,9 +7,22 @@ body {
   line-height: 18px;
 }
 
-p, ol, ul, td {
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p, ol, ul, td, label {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 18px;
 }
 
@@ -47,7 +60,7 @@ div {
 }
 
 #notice {
-  color: green;
+  color: red;
 }
 
 .field_with_errors {
@@ -79,6 +92,46 @@ div {
   }
 }
 
+.navbar {
+  border-bottom: 1px #e8e8e8 solid;
+}
+
+.btn {
+  &:visited {
+    color: #f2f2f2;
+  }
+}
+
+.btn-signup {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+
+  &:visited {
+    color: #8498C2;
+  }
+
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+.btn-filters {
+  padding: 0.2rem 0.75rem;
+  &:hover {
+    border-color: #a9a9a9;
+  }
+}
+
+.btn-filter {
+    background-color: #ddd;
+  }
+
+.btn-reset {
+    background-color: #000;
+  }
+
 label {
   display: block;
+  margin-bottom: .3em;
 }

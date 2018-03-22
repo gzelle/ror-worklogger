@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RorWorklogger</title>
+    <title>Worklogger</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  	<header class="navbar navbar-fixed-top navbar-inverse">
+  	<header class="navbar navbar-fixed-top navbar-default">
       <% if logged_in? %>
         <div class="container">
           <h1>Hello, <%= link_to current_user.name, edit_user_path(current_user) %>!</h1>
         </div>
         <div>
-          <%= link_to "Home",   logs_path %>      
+          <%= link_to "Home",   logs_path %> |   
           <%= link_to "Log out", logout_path, method: :delete %>
         </div>
       <% else %>
       <% end %>
+
     </header>
     <div class="container">
       <%= yield %>

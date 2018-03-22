@@ -7,24 +7,17 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.json
   def index
-    # Variables for printing on views
-    @sdate = params[:startdate]
-    @edate = params[:enddate]
+    @logs = current_user.logs
 
-    if params[:startdate].present? && params[:enddate].present?
-      @logs = current_user.logs.where("startdate >= ? AND startdate <= ?", params[:startdate], params[:enddate])   
-    else
-      if !params[:startdate].present?
-        @sdate = "Choose starting date!"
+    if params[:start_date].present? && params[:end_date].present?
+      date_filters
+      if params[:start_date] <= params[:end_date]
+        @logs = Log.filter_dates(current_user, params[:start_date], params[:end_date])
+      else
+        flash_alerts("End date cannot be earlier than start date.", root_path)
       end
-      if !params[:enddate].present?
-        @edate = "Choose ending date!"
-      end
-      @logs = current_user.logs
     end
-
-    #Variable for sum
-    @sum = @logs.inject(0) { |sum, l| sum + l.duration }
+    @total_hours = Log.get_total_hours(@logs)
   end
 
   # GET /logs/1
@@ -88,17 +81,13 @@ class LogsController < ApplicationController
       @log = Log.find(params[:id])
     end
 
-    def set_category
-      @category = Project.find(params[:project_id])
+    def set_project
+      @project = Project.find(params[:project_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
-      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id)
-    end
-
-    def filter_params
-      params.permit(:sdate, :edate)
+      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id, :start_date, :end_date)
     end
 
     def correct_user
@@ -108,5 +97,16 @@ class LogsController < ApplicationController
 
     def prepare_projects
       @projects = Project.all
+    end
+
+    def date_filters
+      # Variables for printing on views
+      @start_date = params[:start_date]
+      @end_date = params[:end_date]
+    end
+
+    def flash_alerts(alert, path)
+      flash.now[:notice] = alert
+      return path
     end
 end

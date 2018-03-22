@@ -2,46 +2,48 @@
 
 <h1>Logs</h1>
 
-<h3><%= link_to '> Create New Log <', new_log_path, class: "btn btn-primary" %></h3>
-
-
-<div>
-<%= form_tag(logs_path, method: :get) do %>
-Select date: 
-  <%= date_field_tag :startdate, required: true, placeholder: "Select Start Date" %>
-  -
-  <%= date_field_tag :enddate, required: true, placeholder: "Select End Date" %>
-  <%= submit_tag 'Filter' %>
-  <%= link_to 'Reset', logs_path, class: "btn btn-primary" %>
-<% end %>
-</div>
-<h4><%=@sdate%> - <%=@edate%></h4>
-<h3>TOTAL: <%= @sum %> hours</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Duration</th>
-      <th>Project</th>
-      <th>Remarks</th>
-      <th>Date</th>
-      <th>Actions</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @logs.each do |log| %>
-      <tr>
-        <td><%= log.duration %>h</td>
-        <td><%= log.project.name %></td>
-        <td><%= log.remarks %></td>
-        <td><%= log.startdate.strftime("%b %d, %Y") %></td>
-        <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h3><%= link_to 'Create New Log', new_log_path, class: "btn btn-primary" %></h3>
 
 <br>
+<div>
+  <%= form_tag(logs_path, method: :get) do %>
+  Select date: 
+    <%= date_field_tag :start_date, @start_date, required: true %>
+    -
+    <%= date_field_tag :end_date, @end_date, required: true %>
+    <%= submit_tag 'Filter', class: "btn btn-filters btn-filter" %>
+    <%= link_to 'Reset', logs_path, class: "btn btn-filters btn-reset" %>
+  <% end %>
+</div>
+<br>
+<div>
+  <h4><%=@start_date%> - <%=@end_date%></h4>
+  <h3>TOTAL: <%= @total_hours %> hours</h3>
+</div>
+<div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Duration</th>
+        <th>Project</th>
+        <th>Remarks</th>
+        <th>Date</th>
+        <th>Actions</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @logs.each do |log| %>
+        <tr>
+          <td><%= log.duration %>h</td>
+          <td><%= log.project.name %></td>
+          <td><%= log.remarks %></td>
+          <td><%= log.startdate.strftime("%b %d, %Y") %></td>
+          <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
