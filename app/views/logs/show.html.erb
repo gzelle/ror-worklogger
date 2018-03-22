@@ -2,7 +2,7 @@
 
 <p>
   <strong>Duration:</strong>
-  <%= @log.duration %>
+  <%= @log.duration %>hr
 </p>
 
 <p>
@@ -16,13 +16,8 @@
 </p>
 
 <p>
-  <strong>Start Date:</strong>
-  <%= @log.startdate %>
-</p>
-
-<p>
-  <strong>End Date:</strong>
-  <%= @log.enddate %>
+  <strong>Date:</strong>
+  <%= @log.startdate.strftime("%b %d, %Y") %>
 </p>
 
 <%= link_to 'Edit', edit_log_path(@log) %> |

@@ -7,12 +7,24 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.json
   def index
-    if params[:startdate]
-      @logs = Log.where(:startdate => params[:startdate])
-      
+    # Variables for printing on views
+    @sdate = params[:startdate]
+    @edate = params[:enddate]
+
+    if params[:startdate].present? && params[:enddate].present?
+      @logs = current_user.logs.where("startdate >= ? AND startdate <= ?", params[:startdate], params[:enddate])   
     else
-      @logs = Log.all
+      if !params[:startdate].present?
+        @sdate = "Choose starting date!"
+      end
+      if !params[:enddate].present?
+        @edate = "Choose ending date!"
+      end
+      @logs = current_user.logs
     end
+
+    #Variable for sum
+    @sum = @logs.inject(0) { |sum, l| sum + l.duration }
   end
 
   # GET /logs/1
@@ -37,7 +49,7 @@ class LogsController < ApplicationController
 
     respond_to do |format|
       if @log.save
-        format.html { redirect_to @log, notice: 'Log was successfully created.' }
+        format.html { redirect_to logs_path, notice: 'Log was successfully created.' }
         format.json { render :show, status: :created, location: @log }
       else
         format.html { render :new }
@@ -82,7 +94,7 @@ class LogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
-      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id, :sdate, :edate)
+      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id)
     end
 
     def filter_params

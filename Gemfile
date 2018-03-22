@@ -8,13 +8,15 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
+gem 'jquery-ui-rails', '~> 5.0.5'
 # Use bcrypt to hash passwords
 gem 'bcrypt', '3.1.11'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 gem 'rails-controller-testing'
 gem 'will_paginate', '3.1.6'
-gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

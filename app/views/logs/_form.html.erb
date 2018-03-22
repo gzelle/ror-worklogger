@@ -27,18 +27,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :startdate %>
-    <%= form.text_field :startdate, :class => 'datepicker' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :startdate %>
-    <%= form.date_select :startdate, id: :log_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :enddate %>
-    <%= form.date_select :enddate, id: :log_date %>
+    <%= form.label :date %>
+    <%= form.date_field :startdate, id: :log_startdate %>
   </div>
 
   <div class="actions">

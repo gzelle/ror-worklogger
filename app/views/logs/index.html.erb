@@ -2,17 +2,21 @@
 
 <h1>Logs</h1>
 
-<%= link_to 'Create New Log', new_log_path %>
+<h3><%= link_to '> Create New Log <', new_log_path, class: "btn btn-primary" %></h3>
+
+
 <div>
 <%= form_tag(logs_path, method: :get) do %>
 Select date: 
-  <%= date_select :sdate, {}%>
+  <%= date_field_tag :startdate, required: true, placeholder: "Select Start Date" %>
   -
-
+  <%= date_field_tag :enddate, required: true, placeholder: "Select End Date" %>
   <%= submit_tag 'Filter' %>
-  <%= link_to 'Reset', '#' %>
+  <%= link_to 'Reset', logs_path, class: "btn btn-primary" %>
 <% end %>
 </div>
+<h4><%=@sdate%> - <%=@edate%></h4>
+<h3>TOTAL: <%= @sum %> hours</h3>
 
 <table>
   <thead>
@@ -32,9 +36,7 @@ Select date:
         <td><%= log.duration %>h</td>
         <td><%= log.project.name %></td>
         <td><%= log.remarks %></td>
-        <td><%= log.startdate %></td>
-        <td><%= link_to 'Show', log %></td>
-        <td><%= link_to 'Edit', edit_log_path(log) %></td>
+        <td><%= log.startdate.strftime("%b %d, %Y") %></td>
         <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
