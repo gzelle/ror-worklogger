@@ -3,13 +3,11 @@
 one:
   duration: 1
   remarks: MyString
-  startdate: 2018-03-21
-  enddate: 2018-03-21
+  date: 2018-03-21
   user: one
 
 two:
   duration: 1
   remarks: MyString
-  startdate: 2018-03-21
-  enddate: 2018-03-21
+  date: 2018-03-21
   user: two

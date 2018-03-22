@@ -10,10 +10,11 @@ class LogsController < ApplicationController
     @logs = current_user.logs
 
     if params[:start_date].present? && params[:end_date].present?
-      date_filters
+      date_filters(params[:start_date], params[:end_date])
       if params[:start_date] <= params[:end_date]
         @logs = Log.filter_dates(current_user, params[:start_date], params[:end_date])
       else
+        date_filters(nil,nil)
         flash_alerts("End date cannot be earlier than start date.", root_path)
       end
     end
@@ -87,7 +88,7 @@ class LogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def log_params
-      params.require(:log).permit(:duration, :project_id, :remarks, :startdate, :enddate, :user_id, :start_date, :end_date)
+      params.require(:log).permit(:duration, :project_id, :remarks, :date, :user_id, :start_date, :end_date)
     end
 
     def correct_user
@@ -99,10 +100,10 @@ class LogsController < ApplicationController
       @projects = Project.all
     end
 
-    def date_filters
+    def date_filters(startdate, enddate)
       # Variables for printing on views
-      @start_date = params[:start_date]
-      @end_date = params[:end_date]
+      @start_date = startdate
+      @end_date = enddate
     end
 
     def flash_alerts(alert, path)

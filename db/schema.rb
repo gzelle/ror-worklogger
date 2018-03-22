@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321054622) do
+ActiveRecord::Schema.define(version: 20180322101743) do
 
   create_table "logs", force: :cascade do |t|
     t.integer "duration"
     t.string "remarks"
-    t.date "startdate"
-    t.date "enddate"
+    t.date "date"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

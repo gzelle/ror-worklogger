@@ -39,7 +39,7 @@
           <td><%= log.duration %>h</td>
           <td><%= log.project.name %></td>
           <td><%= log.remarks %></td>
-          <td><%= log.startdate.strftime("%b %d, %Y") %></td>
+          <td><%= log.date.strftime("%b %d, %Y") %></td>
           <td><%= link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
